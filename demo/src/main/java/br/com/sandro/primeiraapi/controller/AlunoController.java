@@ -1,24 +1,24 @@
-package br.com.sandro.controller;
+package br.com.sandro.primeiraapi.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sandro.model.Aluno;
-import br.com.sandro.services.AlunoService;
+import br.com.sandro.primeiraapi.model.Aluno;
+import br.com.sandro.primeiraapi.services.AlunoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/alunos")
 public class AlunoController {
 
-	@Autowired
-	AlunoService alunoService;
+	private AlunoService alunoService;
 
-	@GetMapping
+	public AlunoController(AlunoService alunoService) {
+		this.alunoService = alunoService;
+	}
+
+	@GetMapping("/alunos")
 	public Iterable<Aluno> getAllAlunos() {
 		return alunoService.findAll();
 	}

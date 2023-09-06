@@ -1,4 +1,4 @@
-package br.com.sandro.model;
+package br.com.sandro.primeiraapi.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

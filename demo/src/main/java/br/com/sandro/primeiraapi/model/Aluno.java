@@ -1,38 +1,41 @@
-package br.com.sandro.model;
+package br.com.sandro.primeiraapi.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
-public class Usuario {
+@Entity
+@Table(name = "aluno")
+public class Aluno implements Serializable {
+
+	private static final long serialVersionUID = 4366806759458726133L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
 	@NotBlank
-	@Column
 	private String nome;
 
 	@NotBlank
-	@Column
 	private String cpf;
 
-	public Usuario(String nome, String cpf) {
+	private Turma turma;
+
+	public Aluno(@Valid String nome, String cpf) {
 		this.nome = nome;
 		this.cpf = cpf;
 	}
 
-	public UUID getId() {
-		return id;
-	}
+	public Aluno() {
 
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -49,6 +52,18 @@ public class Usuario {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public UUID getId() {
+		return id;
 	}
 
 }
