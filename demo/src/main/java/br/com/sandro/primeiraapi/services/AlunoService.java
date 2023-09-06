@@ -1,6 +1,8 @@
 package br.com.sandro.primeiraapi.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,15 @@ public class AlunoService {
 	@Transactional
 	public Object save(@Valid Aluno aluno) {
 		return alunoRepository.save(aluno);
+	}
+
+	public Optional<Aluno> findById(UUID id) {
+		return alunoRepository.findById(id);
+
+	}
+	
+	public Aluno delete(Aluno aluno) {
+		alunoRepository.delete(aluno);
+		return aluno;
 	}
 }

@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "turma")
@@ -17,12 +19,13 @@ public class Turma implements Serializable {
 	private static final long serialVersionUID = 8709979822871602747L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
-	@Column
+	@NotBlank
 	private String nome;
 
-	@Column
+	@NotBlank
 	private String periodo;
 
 	List<Aluno> alunos = new ArrayList<Aluno>();
@@ -33,13 +36,13 @@ public class Turma implements Serializable {
 		return id;
 	}
 
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
 	public Turma(String nome, String periodo) {
 		this.nome = nome;
 		this.periodo = periodo;
+	}
+
+	public Turma() {
+
 	}
 
 	public String getNome() {

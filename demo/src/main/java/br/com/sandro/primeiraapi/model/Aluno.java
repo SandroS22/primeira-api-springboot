@@ -3,6 +3,8 @@ package br.com.sandro.primeiraapi.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,9 +27,10 @@ public class Aluno implements Serializable {
 	private String nome;
 
 	@NotBlank
+	@UniqueElements
 	private String cpf;
 
-	private Turma turma;
+	private UUID turma;
 
 	public Aluno(@Valid String nome, String cpf) {
 		this.nome = nome;
@@ -54,11 +57,11 @@ public class Aluno implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Turma getTurma() {
+	public UUID getTurma() {
 		return turma;
 	}
 
-	public void setTurma(Turma turma) {
+	public void setTurma(UUID turma) {
 		this.turma = turma;
 	}
 
