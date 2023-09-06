@@ -1,21 +1,31 @@
 package br.com.sandro.controller;
 
-import java.util.List;
-
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sandro.model.Aluno;
-import br.com.sandro.model.repositoy.AlunoRepository;
 import br.com.sandro.services.AlunoService;
+import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/alunos")
 public class AlunoController {
 
+	@Autowired
+	AlunoService alunoService;
+
 	@GetMapping
-	public ResponseEntity<List<Aluno>> getAllAlunos() {
-		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(AlunoService.findAll());
+	public Iterable<Aluno> getAllAlunos() {
+		return alunoService.findAll();
+	}
+
+	@PostMapping
+	public @ResponseBody Aluno saveAluno(@Valid Aluno aluno) {
+		alunoService.save(aluno);
+		return aluno;
 	}
 }

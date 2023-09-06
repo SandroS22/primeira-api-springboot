@@ -2,6 +2,7 @@ package br.com.sandro.model;
 
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,9 +15,11 @@ public class Usuario {
 	private UUID id;
 
 	@NotBlank
+	@Column
 	private String nome;
 
 	@NotBlank
+	@Column
 	private String cpf;
 
 	public Usuario(String nome, String cpf) {

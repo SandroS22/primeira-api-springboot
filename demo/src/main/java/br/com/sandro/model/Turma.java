@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -18,8 +19,10 @@ public class Turma implements Serializable {
 	@Id
 	private UUID id;
 
+	@Column
 	private String nome;
 
+	@Column
 	private String periodo;
 
 	List<Aluno> alunos = new ArrayList<Aluno>();
