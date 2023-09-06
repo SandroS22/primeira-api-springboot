@@ -1,5 +1,6 @@
 package br.com.sandro.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +11,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "turma")
-public class Turma {
+public class Turma implements Serializable {
+
+	private static final long serialVersionUID = 8709979822871602747L;
 
 	@Id
 	private UUID id;
@@ -19,12 +22,10 @@ public class Turma {
 
 	private String periodo;
 
-
 	List<Aluno> alunos = new ArrayList<Aluno>();
 
 	List<Professor> professores = new ArrayList<Professor>();
 
-	
 	public UUID getId() {
 		return id;
 	}
