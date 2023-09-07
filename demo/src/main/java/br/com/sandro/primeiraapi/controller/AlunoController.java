@@ -3,13 +3,14 @@ package br.com.sandro.primeiraapi.controller;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,16 +40,24 @@ public class AlunoController {
 	}
 
 	@PutMapping
-	public @ResponseBody Aluno updateAluno(@Valid Aluno aluno) {
-		alunoService.save(aluno);
-		return aluno;
+	public @ResponseBody Object updateAluno(@RequestParam(name = "id") UUID id, @Valid Aluno aluno) {
+		//FIXME
+		Optional<Aluno> alunoB = alunoService.findById(id);
+		if (alunoB.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			Aluno al = alunoB.get();
+			BeanUtils.copyProperties(aluno, al);
+			alunoService.save(al);
+			return al;
+		}
 	}
 
-	@DeleteMapping(path = "/alunos/{id}")
-	public @ResponseBody Object deleteAluno(@PathVariable(name = "id") UUID id) {
+	@DeleteMapping
+	public @ResponseBody Object deleteAluno(@RequestParam(name = "id") UUID id) {
 		Optional<Aluno> alunoOp = alunoService.findById(id);
-		if(alunoOp == null) {
-			return HttpStatusCode.valueOf(400);
+		if (alunoOp.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
 		} else {
 			alunoService.delete(alunoOp.get());
 			return alunoOp;

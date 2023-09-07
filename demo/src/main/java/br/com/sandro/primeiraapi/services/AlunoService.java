@@ -33,7 +33,7 @@ public class AlunoService {
 		return alunoRepository.findById(id);
 
 	}
-	
+
 	public Aluno delete(Aluno aluno) {
 		alunoRepository.delete(aluno);
 		return aluno;
