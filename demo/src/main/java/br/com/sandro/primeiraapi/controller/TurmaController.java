@@ -25,7 +25,7 @@ public class TurmaController {
 	}
 
 	@PostMapping
-	public @ResponseBody Turma saveTurma(@Valid Turma turma) {
+	public @ResponseBody Turma createTurma(@Valid Turma turma) {
 		turmaService.save(turma);
 		return turma;
 	}

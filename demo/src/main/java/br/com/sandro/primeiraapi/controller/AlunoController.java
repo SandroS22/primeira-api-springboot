@@ -34,7 +34,7 @@ public class AlunoController {
 	}
 
 	@PostMapping
-	public @ResponseBody Aluno saveAluno(@Valid Aluno aluno) {
+	public @ResponseBody Aluno createAluno(@Valid Aluno aluno) {
 		alunoService.save(aluno);
 		return aluno;
 	}
