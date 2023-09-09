@@ -28,4 +28,9 @@ public class ProfessorService {
 		return professorRepository.save(professor);
 
 	}
+
+	public Object delete(Professor professor) {
+		professorRepository.delete(professor);
+		return professor;
+	}
 }
