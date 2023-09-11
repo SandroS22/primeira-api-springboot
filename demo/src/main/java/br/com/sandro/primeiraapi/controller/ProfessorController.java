@@ -31,8 +31,8 @@ public class ProfessorController {
 		return professorService.findAll();
 	}
 
-	@GetMapping(path = "/professor/{id}")
-	public Object getProfessor(@PathVariable(value = "id") UUID id) {
+	@GetMapping(path = "/{id}")
+	public Object getProfessor(@PathVariable("id") UUID id) {
 		Optional<Professor> professor = professorService.findById(id);
 		if (professor.isEmpty()) {
 			return HttpStatusCode.valueOf(404);
