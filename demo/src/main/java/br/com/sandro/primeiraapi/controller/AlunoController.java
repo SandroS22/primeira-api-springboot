@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +34,8 @@ public class AlunoController {
 		return alunoService.findAll();
 	}
 
-	@GetMapping(path = "/{id}")
-	public Object getAluno(@RequestParam UUID id) {
+	@GetMapping(path = "/alunos/{id}")
+	public Object getAluno(@PathVariable(value = "id") UUID id) {
 		Optional<Aluno> aluno = alunoService.findById(id);
 		if (aluno.isEmpty()) {
 			return HttpStatusCode.valueOf(404);

@@ -3,13 +3,16 @@ package br.com.sandro.primeiraapi.controller;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sandro.primeiraapi.model.Professor;
@@ -28,8 +31,8 @@ public class ProfessorController {
 		return professorService.findAll();
 	}
 
-	@GetMapping(path = "/{id}")
-	public Object getProfessor(@PathVariable UUID id) {
+	@GetMapping(path = "/professor/{id}")
+	public Object getProfessor(@PathVariable(value = "id") UUID id) {
 		Optional<Professor> professor = professorService.findById(id);
 		if (professor.isEmpty()) {
 			return HttpStatusCode.valueOf(404);
@@ -43,7 +46,21 @@ public class ProfessorController {
 		professorService.save(professor);
 		return professor;
 	}
-	
+
+	@PutMapping(path = "/{id}")
+	public Object updateProfessor(@RequestParam(name = "id") UUID id, @Valid Professor prof) {
+		//FIXME
+		Optional<Professor> professorT = professorService.findById(id);
+		if (professorT.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			Professor professorP = professorT.get();
+			BeanUtils.copyProperties(prof, professorP);
+			professorService.save(professorP);
+			return professorP;
+		}
+	}
+
 	@DeleteMapping(path = "/{id}")
 	public Object deleteProfessor(@PathVariable UUID id) {
 		Optional<Professor> professor = professorService.findById(id);
