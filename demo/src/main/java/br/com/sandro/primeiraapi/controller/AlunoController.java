@@ -34,8 +34,8 @@ public class AlunoController {
 		return alunoService.findAll();
 	}
 
-	@GetMapping(path = "/alunos/{id}")
-	public Object getAluno(@PathVariable(value = "id") UUID id) {
+	@GetMapping(path = "/{id}")
+	public Object getAluno(@PathVariable("id") UUID id) {
 		Optional<Aluno> aluno = alunoService.findById(id);
 		if (aluno.isEmpty()) {
 			return HttpStatusCode.valueOf(404);
