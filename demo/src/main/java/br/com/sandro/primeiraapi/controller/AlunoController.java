@@ -33,6 +33,16 @@ public class AlunoController {
 		return alunoService.findAll();
 	}
 
+	@GetMapping(path = "/{id}")
+	public Object getAluno(@RequestParam UUID id) {
+		Optional<Aluno> aluno = alunoService.findById(id);
+		if (aluno.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			return aluno.get();
+		}
+	}
+
 	@PostMapping
 	public @ResponseBody Aluno createAluno(@Valid Aluno aluno) {
 		alunoService.save(aluno);
@@ -41,7 +51,6 @@ public class AlunoController {
 
 	@PutMapping
 	public @ResponseBody Object updateAluno(@RequestParam(name = "id") UUID id, @Valid Aluno aluno) {
-		//FIXME
 		Optional<Aluno> alunoB = alunoService.findById(id);
 		if (alunoB.isEmpty()) {
 			return HttpStatusCode.valueOf(404);

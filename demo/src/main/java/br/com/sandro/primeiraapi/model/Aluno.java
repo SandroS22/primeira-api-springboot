@@ -3,8 +3,7 @@ package br.com.sandro.primeiraapi.model;
 import java.io.Serializable;
 import java.util.UUID;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +26,7 @@ public class Aluno implements Serializable {
 	private String nome;
 
 	@NotBlank
-	@UniqueElements
+	@Column(unique = true)
 	private String cpf;
 
 	private UUID turma;
