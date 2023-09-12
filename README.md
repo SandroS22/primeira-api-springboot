@@ -1,3 +1,3 @@
 # Primeire API em Spring Boot
 
- Brincando um pouco com Spring Boot e chegou a hora de fazer algumas coisinhas
+ Essa é minha primeira tentativa de construção de API utilizando da linguagem java e seu framework Spring Boot
