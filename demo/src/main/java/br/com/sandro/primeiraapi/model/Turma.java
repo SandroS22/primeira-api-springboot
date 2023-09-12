@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -28,8 +29,10 @@ public class Turma implements Serializable {
 	@NotBlank
 	private String periodo;
 
+	@Transient
 	List<Aluno> alunos = new ArrayList<Aluno>();
 
+	@Transient
 	List<Professor> professores = new ArrayList<Professor>();
 
 	public UUID getId() {
