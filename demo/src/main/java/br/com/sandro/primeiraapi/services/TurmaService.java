@@ -30,4 +30,9 @@ public class TurmaService {
 	public Optional<Turma> findById(UUID id) {
 		return turmaRepository.findById(id);
 	}
+
+	public Turma delete(Turma turma) {
+		turmaRepository.delete(turma);
+		return turma;
+	}
 }

@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,17 @@ public class TurmaController {
 			BeanUtils.copyProperties(turma, tur);
 			turmaService.save(tur);
 			return tur;
+		}
+	}
+
+	@DeleteMapping
+	public @ResponseBody Object deleteTurma(@RequestParam(name = "id") UUID id) {
+		Optional<Turma> turma = turmaService.findById(id);
+		if (turma.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			turmaService.delete(turma.get());
+			return turma.get();
 		}
 	}
 }
