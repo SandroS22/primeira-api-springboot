@@ -1,10 +1,17 @@
 package br.com.sandro.primeiraapi.controller;
 
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +31,16 @@ public class TurmaController {
 		return turmaService.findAll();
 	}
 
+	@GetMapping(path = "/{id}")
+	public Object getTurma(@PathVariable("id") UUID id) {
+		Optional<Turma> turma = turmaService.findById(id);
+		if (turma.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			return turma.get();
+		}
+	}
+
 	@PostMapping
 	public @ResponseBody Turma createTurma(@Valid Turma turma) {
 		turmaService.save(turma);
@@ -31,8 +48,15 @@ public class TurmaController {
 	}
 
 	@PutMapping
-	public @ResponseBody Turma updateTurma(@Valid Turma turma) {
-		turmaService.save(turma);
-		return turma;
+	public @ResponseBody Object updateTurma(@RequestParam(name = "id") UUID id, @Valid Turma turma) {
+		Optional<Turma> turmaT = turmaService.findById(id);
+		if (turmaT.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			Turma tur = turmaT.get();
+			BeanUtils.copyProperties(turma, tur);
+			turmaService.save(tur);
+			return tur;
+		}
 	}
 }
