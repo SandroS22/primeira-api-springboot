@@ -15,6 +15,6 @@ public class ApiApplication {
 
 	@GetMapping("/")
 	public String ola() {
-		return "ola";
+		return "Olá! Essa é uma api simples que desenvolvi para treinar os conceitos de Spring Boot";
 	}
 }
