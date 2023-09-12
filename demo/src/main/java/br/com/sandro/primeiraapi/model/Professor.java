@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.annotation.Transient;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Professor implements Serializable {
 	@Column(unique = true)
 	private String cpf;
 
+	@Transient
 	List<Turma> turmas = new ArrayList<>();
 
 	public Professor(String nome, String cpf) {

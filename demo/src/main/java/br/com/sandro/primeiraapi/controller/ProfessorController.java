@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sandro.primeiraapi.model.Professor;
@@ -48,8 +47,7 @@ public class ProfessorController {
 	}
 
 	@PutMapping(path = "/{id}")
-	public Object updateProfessor(@RequestParam(name = "id") UUID id, @Valid Professor prof) {
-		//FIXME
+	public Object updateProfessor(@PathVariable("id") UUID id, @Valid Professor prof) {
 		Optional<Professor> professorT = professorService.findById(id);
 		if (professorT.isEmpty()) {
 			return HttpStatusCode.valueOf(404);
