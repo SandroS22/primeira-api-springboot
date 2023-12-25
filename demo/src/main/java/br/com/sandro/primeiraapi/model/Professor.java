@@ -20,7 +20,7 @@ public class Professor implements Serializable {
 	private static final long serialVersionUID = 6857789213700600705L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 
 	private String nome;

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.sandro.primeiraapi.model.Professor;
 import br.com.sandro.primeiraapi.model.Turma;
 import br.com.sandro.primeiraapi.services.TurmaService;
 import jakarta.validation.Valid;
@@ -70,5 +71,10 @@ public class TurmaController {
 			turmaService.delete(turma.get());
 			return turma.get();
 		}
+	}
+
+	public HttpStatusCode adicionarProfessor(Professor professor) {
+		// TODO
+		return HttpStatusCode.valueOf(200);
 	}
 }

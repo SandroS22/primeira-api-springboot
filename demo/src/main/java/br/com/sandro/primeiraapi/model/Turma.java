@@ -20,7 +20,7 @@ public class Turma implements Serializable {
 	private static final long serialVersionUID = 8709979822871602747L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 
 	@NotBlank

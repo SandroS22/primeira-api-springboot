@@ -19,7 +19,7 @@ public class Aluno implements Serializable {
 	private static final long serialVersionUID = 4366806759458726133L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 
 	@NotBlank

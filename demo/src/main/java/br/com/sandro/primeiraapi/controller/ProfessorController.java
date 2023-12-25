@@ -69,4 +69,17 @@ public class ProfessorController {
 		}
 	}
 
+	@GetMapping(path = "/professor/turmas/{id}")
+	public Object buscarTurmasDoProfessor(UUID id) {
+		// FIXME
+		Optional<Professor> professorT = professorService.findById(id);
+		if (professorT.isEmpty()) {
+			return HttpStatusCode.valueOf(404);
+		} else {
+			Professor professorP = professorT.get();
+			BeanUtils.copyProperties(professorT, professorP);
+			return professorService.findTurmaByProfessor(professorP);
+		}
+	}
+
 }
